@@ -1,0 +1,1 @@
+Dit project test de mogelijkheden van FlowPlayer voor educatieve doeleinde.
