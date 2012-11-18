@@ -1,0 +1,121 @@
+<!doctype html>
+
+<head>
+
+   <!-- player skin -->
+   <link rel="stylesheet" type="text/css" href="skin/functional.css" />
+
+   <!-- site specific styling -->
+   <style>
+   body { font: 12px "Myriad Pro", "Lucida Grande", sans-serif; text-align: center; padding-top: 5%; }
+   .flowplayer { width: 80%; }
+	   
+	.btn {
+		position: relative;
+		display: inline-block;
+		padding: 15px 25px 15px;
+		font-size: 30px;
+		margin: 0;
+		text-decoration: none !important;
+		text-align: center;
+		line-height: 35px;
+		vertical-align: middle;
+		background: #D6DEE3;
+		border: 1px solid;
+		cursor: pointer;
+		Ignore: a;
+		color: #333333;
+	}
+	.multiple {
+		width: 500px;
+	}
+	.btn:hover,.btn:active,.btn:focus{
+		Ignore:a;
+		color:#2B7AAE
+	}
+   
+	#timeline_info .vragen{background-color:#333;background-color:rgba(0,0,0,0.0);position:absolute;top:50px;-webkit-border-radius:4px;
+	-moz-border-radius:4px;border-radius:4px;opacity:0;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+	-webkit-transition:all .5s;-moz-transition:all .5s;transition:all .5s;z-index:1;padding:15px;color:#eee;font-weight:bold;font-size:16px}
+
+	#timeline_info.cue0 .vraag0{width: 55%; opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);left:21%;top:10%;z-index:2;} 
+	#timeline_info.cue1 .vraag1{width: 55%; opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);left:28%;top:20%;z-index:2;}
+   </style>
+
+   <!-- flowplayer depends on jQuery 1.4+ (for now) -->
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+   <!-- include flowplayer -->
+   <script src="flowplayer.min.js"></script>
+
+</head>
+
+<body>
+
+   <!-- the player -->
+   <div id="timeline_info" class="flowplayer" data-cuepoints="[19.9, -2]" data-swf="flowplayer.swf" data-ratio="0.417">
+	 <video>
+         <source type="video/mp4" src="reclame_-_belastingdienst.mp4"/>
+      </video>
+	<span class="vragen vraag0">
+		<h1>Op welke wijze moeten burgers hun voorlopige teruggave controleren?</h1>
+		<a onclick="action(0, 0)" class="btn multiple">A: Als proviteur van de samenleving</a><br />
+		<a onclick="action(0, 1)" class="btn multiple">B: Als vijand van de staat</a><br />
+		<a onclick="action(0, 2)" class="btn multiple">C: Als neef van de belastingdienst</a><br />
+		<a onclick="action(0, 3)" class="btn multiple">D: Als vriend</a><br />
+	</span>
+	<span class="vragen vraag1">
+		<a onclick="action(1, 0)" class="btn">Standpunt A:<br> Ik vond dit een leuk filmpje</a><br />
+		<a onclick="action(1, 1)" class="btn">Standpunt B:<br> Ik vond dit een saai filmpje</a>
+	</span>
+   </div>
+   <br /><a href="javascript:;" onclick="speed('slower')">Langzamer</a> | <a href="javascript:;" onclick="speed('faster')">Sneller</a>
+   
+   
+   <script type="text/javascript">
+   var $iSpeed = 1;
+
+   function action(iVraag, iAction) {
+		switch (iAction) {
+			case 0:		break;
+			case 1:		break;
+			case 2:		break;
+			case 3:		break;
+			default:	break;
+		}
+
+		$('.vraag'+iVraag).hide();
+		
+		var api = flowplayer();
+		api.disable();
+		api.toggle();
+   }
+   
+   function speed(e) {
+		switch (e) {
+			case "faster":		$iSpeed += 0.25;	break;
+			case "slower":		$iSpeed -= 0.25;	break;
+			default:			$iSpeed = 1;		break;
+		}
+		var api = flowplayer();
+		api.speed($iSpeed);
+   }
+   
+	$(function() {
+	  flowplayer().bind("ready", function(e, api) {
+		api.bind("resume", function(e, api) {
+			document.body.style.background = 'black';
+		});
+		api.bind("pause", function(e, api) {
+			document.body.style.background = 'white';
+		});
+	  });
+	});
+   
+	$(".flowplayer").bind("cuepoint", function(e, api, cuepoint) {
+		api.toggle();
+		api.disable();
+	});
+   </script>
+
+</body>
